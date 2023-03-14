@@ -57,3 +57,23 @@ def agregar_adopcion(request):
      }
      return render(request, 'AppPagweb/adoptame.html', context)
 
+def buscar(request):
+    return render(request, "AppPagweb/buscar.html")
+
+def buscar_animal(request):
+
+      print("buscar()")
+      if request.GET['Animal']:
+
+           Animal = request.GET['Animal']
+
+           print("buscar() " + Animal)
+
+           post = Postear.objects.filter(Animal__icontains=Animal)
+
+           return render(request, 'AppPagweb/buscar.html', {"post":post, "Animal": Animal})
+
+      else:
+           respuesta = "No enviaste datos"
+
+      return HttpResponse(respuesta)

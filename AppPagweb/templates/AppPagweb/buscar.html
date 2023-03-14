@@ -1,0 +1,37 @@
+{% extends "AppPagweb/base.html" %}
+{% load static %}
+
+ 
+ {%block main%}.
+ 
+ <h3>Hola! Acá podes buscar los posts de otras personas que hayan publicado en Adoptinder.</h3>
+ <h5> Ingresá el tipo de animal que quieras buscar: (perro/gato/etc)</h5>
+
+ <form action="{% url 'buscar-animal' %}" method="GET">
+ 
+     <input type="text" name="Animal" id="Animal">
+ 
+     <input type="submit" value="Buscar">
+ 
+ </form>
+
+
+ {% if post %}
+
+ <p>Estás buscando: {{Animal}}</p>
+ 
+ <ul>
+ {% for p in post %}
+     <li> {{p.Animal}} - {{p.Caracteristicas}} - {{p.Mensaje}} </li>
+ {% endfor %} 
+ </ul>
+ 
+ {% else %}
+
+ {% if Animal %}
+ <p>Ups! Por ahora no hay adopciones disponibles de {{Animal}} </p>
+ {% endif %}
+ 
+ {% endif %}
+ 
+ {% endblock %}

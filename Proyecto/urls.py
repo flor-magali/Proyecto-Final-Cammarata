@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from AppPagweb.views import index, usuario, postear, adoptame, agregar_usuario, agregar_post, agregar_adopcion
+from AppPagweb.views import index, usuario, postear, adoptame, agregar_usuario, agregar_post, agregar_adopcion, buscar_animal,buscar
 
 
 urlpatterns = [
@@ -27,5 +27,7 @@ urlpatterns = [
     path('usuario/agregar',agregar_usuario, name='agregar-usuario'),
     path('postear/agregar',agregar_post, name='agregar-post'),
     path('adoptame/agregar',agregar_adopcion, name='agregar-adopcion'),
+    path('buscar',buscar, name='buscar'),
+    path('buscar/animal',buscar_animal, name='buscar-animal')
 ]
 
