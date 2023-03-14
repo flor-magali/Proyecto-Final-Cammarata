@@ -15,11 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from AppPagweb.views import index
+from AppPagweb.views import index, usuario, postear, adoptame
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index, name="index"),
-    
+    path('',index, name = "Inicio"),
+    path('usuario', usuario, name="Usuario"),
+    path('postear', postear, name="Postear"),
+    path('adoptame', adoptame, name="Adoptame"),
 ]
