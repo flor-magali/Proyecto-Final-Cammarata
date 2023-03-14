@@ -12,5 +12,18 @@
       </svg>
  </h2>
  <h5>Acá podes postear los datos del animalito que estas dando en adopción.</h5>
+
+<form action="{% url 'agregar-post' %}" method="post">
+  {% csrf_token %}
+  {{form.as_p}}
+  <input type="submit" value="Agregar">
+</form>
+
+<ul>
+{%  for p in post  %}
+<li> {{ p.Animal }} - {{p.Caracteristicas}} - {{p.Mensaje}}</li>  
+{% endfor %}
+</ul>
+
  
 {% endblock %}

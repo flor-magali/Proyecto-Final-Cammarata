@@ -12,4 +12,17 @@
  </h1>
  <h5>Hay una mascota esperando por vos! Indicanos que animalito estas buscando adoptar, tus datos, y nos pondremos en contacto con vos a la brevedad.</h5>
  
+<form action="{% url 'agregar-adopcion' %}" method="post">
+  {% csrf_token %}
+  {{form.as_p}}
+  <input type="submit" value="Agregar">
+</form>
+
+<ul>
+{%  for adop in adopcion  %}
+<li> {{ adop.Animal }} - {{adop.Caracteristicas}}</li>  
+{% endfor %}
+</ul>
+
+
 {% endblock %}
