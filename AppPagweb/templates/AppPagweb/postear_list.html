@@ -5,9 +5,9 @@
  {%block main%}.
  
  {%  for post in object_list  %}
- <li>{{post.id}} {{ post.Animal }} - {{post.Caracteristicas}} 
+ <li>{{post.publisher}} - {{ post.Animal }} - {{post.Caracteristicas}} 
       <a href="{% url 'post-detail' post.id %}">Detalle</a>
-      {% if user.is_authenticated %}
+      {% if user.is_authenticated and user.id == post.publisher.id %}
       <a href="{% url 'post-update' post.id %}">Actualizar</a>
       <a href="{% url 'post-delete' post.id %}">Borrar</a>   
       {% endif %}

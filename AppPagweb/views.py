@@ -6,7 +6,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 
 def index(request):
@@ -44,6 +44,10 @@ class PostList(ListView):
     model = Postear
     context_object_name = "posts"
 
+class PostMineList(LoginRequiredMixin, PostList):
+    def get_queryset(self):
+        return Postear.objects.filter(publisher=self.request.user.id).all()
+
 class PostDetail(DetailView):
     model = Postear
     context_object_name = "post"
@@ -52,6 +56,11 @@ class PostUpdate(LoginRequiredMixin,UpdateView):
     model = Postear
     success_url = reverse_lazy("post-list")
     fields = '__all__'
+
+    def test_func(self):
+        user_id = self.request.user.id
+        post_id =  self.kwargs.get("pk")
+        return Postear.objects.filter(publisher=user_id, id=post_id).exists()
 
 class PostDelete(LoginRequiredMixin,DeleteView):
     model = Postear

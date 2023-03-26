@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Usuario(models.Model):
     Nombre = models.CharField(max_length=40)
@@ -14,6 +15,7 @@ class Postear(models.Model):
     Edad = models.CharField(max_length=40)
     Caracteristicas = models.CharField(max_length=100)
     Mensaje = models.CharField(max_length=100)
+    publisher = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name="publisher")
 
     def __str__(self):
         return f"{self.id} - {self.Animal}"
