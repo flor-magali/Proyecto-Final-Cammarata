@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from AppPagweb.views import (index, usuario, adoptame, agregar_usuario, agregar_post, agregar_adopcion, buscar_animal,buscar)
-from AppPagweb.views import ( PostCreate, PostDelete, PostSearch, PostUpdate, PostDetail,PostList)
+from AppPagweb.views import ( PostCreate, PostDelete, PostSearch, PostUpdate, PostDetail,PostList, Login, SignUp, Logout)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -34,5 +34,9 @@ urlpatterns = [
     path('post/<pk>/update', PostUpdate.as_view(), name="post-update"),
     path('post/<pk>/delete', PostDelete.as_view(), name="post-delete"),
     path('post/search', PostSearch.as_view(), name="post-search"),
+    path('login/', Login.as_view(), name="login"),
+    path('signup/', SignUp.as_view(), name="signup"),
+    path('logout/', Logout.as_view(), name="logout"),
+
 ]
 

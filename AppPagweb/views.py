@@ -4,6 +4,10 @@ from AppPagweb.forms import UsuarioForm, PostearForm, AdoptameForm
 from AppPagweb.models import Usuario, Postear, Adoptame
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 def index(request):
     return render(request, "AppPagweb/index.html")
@@ -30,7 +34,7 @@ def adoptame(request):
 #       }
 #      return render(request, "AppPagweb/postear.html",context)
 
-class PostCreate(CreateView):
+class PostCreate(LoginRequiredMixin, CreateView):
      model = Postear
      success_url = reverse_lazy("post-list")
      print("dasdadsdasdaaaefsef")
@@ -44,12 +48,12 @@ class PostDetail(DetailView):
     model = Postear
     context_object_name = "post"
 
-class PostUpdate(UpdateView):
+class PostUpdate(LoginRequiredMixin,UpdateView):
     model = Postear
     success_url = reverse_lazy("post-list")
     fields = '__all__'
 
-class PostDelete(DeleteView):
+class PostDelete(LoginRequiredMixin,DeleteView):
     model = Postear
     context_object_name = "post"
     success_url = reverse_lazy("post-list")
@@ -62,6 +66,18 @@ class PostSearch(ListView):
         criterio = self.request.GET.get("criterio")
         result = Postear.objects.filter(Animal__icontains=criterio).all()
         return result
+    
+class Login(LoginView):
+     next_page=reverse_lazy("post-list")
+
+class SignUp(CreateView):
+    form_class = UserCreationForm
+    template_name = 'registration/signup.html'
+    success_url = reverse_lazy('post-list')
+
+class Logout(LogoutView):
+    template_name = "registration/logout.html"
+
 
 
 
