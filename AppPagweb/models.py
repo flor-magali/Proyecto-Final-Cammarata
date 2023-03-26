@@ -16,6 +16,11 @@ class Postear(models.Model):
     Caracteristicas = models.CharField(max_length=100)
     Mensaje = models.CharField(max_length=100)
     publisher = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name="publisher")
+    image = models.ImageField(upload_to="posts", null=True, blank=True)
+
+    @property
+    def image_url(self):
+        return self.image.url if self.image else ''
 
     def __str__(self):
         return f"{self.id} - {self.Animal}"

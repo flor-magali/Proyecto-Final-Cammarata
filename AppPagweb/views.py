@@ -52,7 +52,7 @@ class PostDetail(DetailView):
     model = Postear
     context_object_name = "post"
 
-class PostUpdate(LoginRequiredMixin,UpdateView):
+class PostUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Postear
     success_url = reverse_lazy("post-list")
     fields = '__all__'
@@ -62,10 +62,15 @@ class PostUpdate(LoginRequiredMixin,UpdateView):
         post_id =  self.kwargs.get("pk")
         return Postear.objects.filter(publisher=user_id, id=post_id).exists()
 
-class PostDelete(LoginRequiredMixin,DeleteView):
+class PostDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Postear
     context_object_name = "post"
     success_url = reverse_lazy("post-list")
+
+    def test_func(self):
+        user_id = self.request.user.id
+        post_id =  self.kwargs.get("pk")
+        return Postear.objects.filter(publisher=user_id, id=post_id).exists()
 
 class PostSearch(ListView):
     model = Postear
