@@ -1,0 +1,12 @@
+{% extends "AppPagweb/base.html" %}
+{% load static %}
+
+ 
+ {%block main%}
+ <ul>
+<li> {{post.id}} {{ post.Animal }} - {{post.Edad}} - {{post.Caracteristicas}} - {{post.Mensaje}}
+    <!-- <a href="">Actualizar</a>
+    <a href="">Borrar</a>    -->
+</li>
+</ul> 
+{% endblock %}

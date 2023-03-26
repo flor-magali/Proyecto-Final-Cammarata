@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from AppPagweb.forms import UsuarioForm, PostearForm, AdoptameForm
 from AppPagweb.models import Usuario, Postear, Adoptame
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 def index(request):
     return render(request, "AppPagweb/index.html")
@@ -21,12 +23,45 @@ def adoptame(request):
      }
     return render(request, "AppPagweb/adoptame.html",context)
 
-def postear(request):
-    context = {
-    "form": PostearForm(),
-    "post": Postear.objects.all(),
-     }
-    return render(request, "AppPagweb/postear.html",context)
+# def postear(request):
+#      context = {
+#      "form": PostearForm(),
+#      "post": Postear.objects.all(),
+#       }
+#      return render(request, "AppPagweb/postear.html",context)
+
+class PostCreate(CreateView):
+     model = Postear
+     success_url = reverse_lazy("post-list")
+     print("dasdadsdasdaaaefsef")
+     fields = '__all__'
+
+class PostList(ListView):
+    model = Postear
+    context_object_name = "posts"
+
+class PostDetail(DetailView):
+    model = Postear
+    context_object_name = "post"
+
+class PostUpdate(UpdateView):
+    model = Postear
+    success_url = reverse_lazy("post-list")
+    fields = '__all__'
+
+class PostDelete(DeleteView):
+    model = Postear
+    context_object_name = "post"
+    success_url = reverse_lazy("post-list")
+
+class PostSearch(ListView):
+    model = Postear
+    context_object_name = "posts"
+
+    def get_queryset(self):
+        criterio = self.request.GET.get("criterio")
+        result = Postear.objects.filter(Animal__icontains=criterio).all()
+        return result
 
 
 
@@ -46,7 +81,7 @@ def agregar_post(request):
           "form": PostearForm(),
           "post": Postear.objects.all(),
      }
-     return render(request, 'AppPagweb/postear.html', context)
+     return render(request, 'AppPagweb/postear_form.html', context)
 
 def agregar_adopcion(request):
      adopcion_form = AdoptameForm(request.POST)
@@ -62,18 +97,18 @@ def buscar(request):
 
 def buscar_animal(request):
 
-      print("buscar()")
-      if request.GET['Animal']:
+       print("buscar()")
+       if request.GET['Animal']:
 
-           Animal = request.GET['Animal']
+            Animal = request.GET['Animal']
 
-           print("buscar() " + Animal)
+            print("buscar() " + Animal)
 
-           post = Postear.objects.filter(Animal__icontains=Animal)
+            post = Postear.objects.filter(Animal__icontains=Animal)
 
-           return render(request, 'AppPagweb/buscar.html', {"post":post, "Animal": Animal})
+            return render(request, 'AppPagweb/buscar.html', {"post":post, "Animal": Animal})
 
-      else:
-           respuesta = "No enviaste datos"
+       else:
+            respuesta = "No enviaste datos"
 
-      return HttpResponse(respuesta)
+       return HttpResponse(respuesta)
