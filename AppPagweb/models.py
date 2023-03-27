@@ -17,6 +17,7 @@ class Postear(models.Model):
     Mensaje = models.CharField(max_length=100)
     publisher = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name="publisher")
     image = models.ImageField(upload_to="posts", null=True, blank=True)
+    creado_el = models.DateTimeField(auto_now_add=True)
 
     @property
     def image_url(self):

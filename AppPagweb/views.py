@@ -10,10 +10,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 def index(request):
     return render(request, "AppPagweb/index.html")
 
+def aboutme(request):
+    return render(request, "AppPagweb/aboutme.html")
+
 class PostCreate(LoginRequiredMixin, CreateView):
      model = Postear
      success_url = reverse_lazy("post-list")
-     print("dasdadsdasdaaaefsef")
      fields = '__all__'
 
 class PostList(ListView):

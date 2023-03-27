@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from AppPagweb.views import ( index, PostCreate, PostDelete, PostSearch, PostUpdate,PostDetail,
+from AppPagweb.views import ( index, aboutme, PostCreate, PostDelete, PostSearch, PostUpdate,PostDetail,
                              PostList, Login, SignUp, Logout, PostMineList, ProfileCreate, ProfileUpdate)
 from django.conf import settings
 from django.conf.urls.static import static
@@ -23,6 +23,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',index, name = "Inicio"),
+    path('aboutme/',aboutme, name ="aboutme"),
     path('postear/', PostCreate.as_view(), name="Postear"),
     path('post/list', PostList.as_view(), name="post-list"),
     path('post/<pk>/detail', PostDetail.as_view(), name="post-detail"),

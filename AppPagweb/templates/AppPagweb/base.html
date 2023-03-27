@@ -38,6 +38,7 @@
                     {% else %}
                     <a class="navbar-brand" href="{% url 'profile-create' %}">Crear Perfil</a>
                     {% endif %}
+                    <a class="navbar-brand" href="{% url 'aboutme' %}">Sobre mi</a>
                     <a class="navbar-brand" href="{% url 'logout' %}">{{user.username}} | Salir</a>
                     <form action="{% url 'post-search' %}" class="d-flex">
                         <input class="form-control me-2" name="criterio" type="search" placeholder="Buscar un post" aria-label="Search">
