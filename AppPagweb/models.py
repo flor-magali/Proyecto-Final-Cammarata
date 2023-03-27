@@ -11,9 +11,9 @@ class Usuario(models.Model):
         return f"{self.id} - {self.Nombre}"
     
 class Postear(models.Model):
+    Titulo = models.CharField(max_length=60)
     Animal = models.CharField(max_length=40)
-    Edad = models.CharField(max_length=40)
-    Caracteristicas = models.CharField(max_length=100)
+    Caracteristicas = models.CharField(max_length=150)
     Mensaje = models.CharField(max_length=100)
     publisher = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name="publisher")
     image = models.ImageField(upload_to="posts", null=True, blank=True)
