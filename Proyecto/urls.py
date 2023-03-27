@@ -15,21 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from AppPagweb.views import ( index, PostCreate, PostDelete, PostSearch, PostUpdate,
-                              PostDetail,PostList, Login, SignUp, Logout, PostMineList)
+from AppPagweb.views import ( index, PostCreate, PostDelete, PostSearch, PostUpdate,PostDetail,
+                             PostList, Login, SignUp, Logout, PostMineList, ProfileCreate, ProfileUpdate)
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',index, name = "Inicio"),
-    # path('usuario/', usuario, name="Usuario"),
-    # path('adoptame/', adoptame, name="Adoptame"),
-    # path('usuario/agregar',agregar_usuario, name='agregar-usuario'),
-    # path('postear/agregar',agregar_post, name='agregar-post'),
-    # path('adoptame/agregar',agregar_adopcion, name='agregar-adopcion'),
-    # path('buscar',buscar, name='buscar'),
-    # path('buscar/animal',buscar_animal, name='buscar-animal'),
     path('postear/', PostCreate.as_view(), name="Postear"),
     path('post/list', PostList.as_view(), name="post-list"),
     path('post/<pk>/detail', PostDetail.as_view(), name="post-detail"),
@@ -40,6 +33,8 @@ urlpatterns = [
     path('signup/', SignUp.as_view(), name="signup"),
     path('logout/', Logout.as_view(), name="logout"),
     path('post/list/mine', PostMineList.as_view(), name="post-mine"),
+    path('profile/create', ProfileCreate.as_view(), name="profile-create" ),
+    path('profile/<pk>/update', ProfileUpdate.as_view(), name="profile-update" ),
 
 ]
 
