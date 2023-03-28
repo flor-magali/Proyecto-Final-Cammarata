@@ -1,15 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class Usuario(models.Model):
-    Nombre = models.CharField(max_length=40)
-    Apellido = models.CharField(max_length=40)
-    Email = models.EmailField()
-    Direccion = models.CharField(max_length=40)
-     
-    def __str__(self):
-        return f"{self.id} - {self.Nombre}"
-    
 class Postear(models.Model):
     Titulo = models.CharField(max_length=60)
     Animal = models.CharField(max_length=40)
@@ -25,18 +16,15 @@ class Postear(models.Model):
 
     def __str__(self):
         return f"{self.id} - {self.Animal}"
-
-class Adoptame(models.Model):
-    Animal = models.CharField(max_length=40)
-    Caracteristicas = models.CharField(max_length=100)
-    Direccion = models.CharField(max_length=40)
-    
-    def __str__(self):
-        return f"{self.id} - {self.Animal}"
     
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
     avatar = models.ImageField(upload_to="avatares", null=True, blank=True)
+
+    @property
+    def avatar_url(self):
+        return self.avatar.url if self.avatar else ''
+
 
 class Mensaje(models.Model):
     mensaje = models.TextField(max_length=500)

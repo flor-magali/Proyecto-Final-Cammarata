@@ -32,20 +32,36 @@
                       </svg>
                     </a>
                     <a class="navbar-brand" href="{% url 'post-list' %}">Todos los Posts</a>
-                    <a class="navbar-brand" href="{% url 'post-mine' %}">Mis Posts</a>
-                    {% if user.profile %}
-                    <a class="navbar-brand" href="{% url 'profile-update' user.profile.id %}">Editar Perfil</a>
-                    {% else %}
-                    <a class="navbar-brand" href="{% url 'profile-create' %}">Crear Perfil</a>
-                    {% endif %}
                     <a class="navbar-brand" href="{% url 'mensaje-create' %}"> Enviar Mensajes</a>
-                    <a class="navbar-brand" href="{% url 'mensaje-list' %}">Mensajes</a>
-                    <a class="navbar-brand" href="{% url 'aboutme' %}">Sobre mi</a>
-                    <a class="navbar-brand" href="{% url 'logout' %}">{{user.username}} | Salir</a>
-                    <form action="{% url 'post-search' %}" class="d-flex">
-                        <input class="form-control me-2" name="criterio" type="search" placeholder="Buscar un post" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Buscar</button>
-                      </form>
+                    <a class="navbar-brand" href="{% url 'aboutme' %}"> Sobre mi</a>
+
+                    {%if user.profile.avatar_url %}
+                     <h5>{{user.username}} <img src="{{user.profile.avatar_url}}" height="100%" width="48px" style="border-radius: 50%"></h5>
+                    {% endif %}
+
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                        
+                        <form action="{% url 'post-search' %}" class="d-flex">
+                            <input class="form-control me-2" name="criterio" type="search" placeholder="Buscar un post" aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit">Buscar</button>
+                        </form>
+                    
+                        <a class="navbar-brand" href="{% url 'post-mine' %}">Mis Posts</a>
+                        <a class="navbar-brand" href="{% url 'mensaje-list' %}">Mis Mensajes</a>
+                        {% if user.profile %}
+                        <a class="navbar-brand" href="{% url 'profile-update' user.profile.id %}">Editar Perfil</a>
+                        {% else %}
+                        <a class="navbar-brand" href="{% url 'profile-create' %}">Crear Perfil</a>
+                        {% endif %}
+                        <a class="navbar-brand" href="{% url 'logout' %}"> Salir</a>
+                   </ul>
+
+
+
                     
                 {% else %}
                     <a class="navbar-brand" href="{% url 'login' %}">Ingresar</a>

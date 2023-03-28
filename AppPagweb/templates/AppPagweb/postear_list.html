@@ -1,13 +1,12 @@
 {% extends "AppPagweb/base.html" %}
 {% load static %}
 
- 
  {%block main%}.
- 
+
  {%if not posts%}
  <h1>No hay posts aún.</h1>
  {%endif%}
- 
+
  {%  for post in object_list  %}
  <li>{{post.publisher}}:  {{ post.Titulo }} - ({{post.Animal}})
       <a href="{% url 'post-detail' post.id %}">Detalle</a>
