@@ -38,6 +38,8 @@
                     {% else %}
                     <a class="navbar-brand" href="{% url 'profile-create' %}">Crear Perfil</a>
                     {% endif %}
+                    <a class="navbar-brand" href="{% url 'mensaje-create' %}"> Enviar Mensajes</a>
+                    <a class="navbar-brand" href="{% url 'mensaje-list' %}">Mensajes</a>
                     <a class="navbar-brand" href="{% url 'aboutme' %}">Sobre mi</a>
                     <a class="navbar-brand" href="{% url 'logout' %}">{{user.username}} | Salir</a>
                     <form action="{% url 'post-search' %}" class="d-flex">

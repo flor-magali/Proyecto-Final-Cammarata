@@ -16,7 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from AppPagweb.views import ( index, aboutme, PostCreate, PostDelete, PostSearch, PostUpdate,PostDetail,
-                             PostList, Login, SignUp, Logout, PostMineList, ProfileCreate, ProfileUpdate)
+                             PostList, Login, SignUp, Logout, PostMineList, ProfileCreate, ProfileUpdate,
+                             MensajeList, MensajeCreate, MensajeDelete)
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -36,6 +37,9 @@ urlpatterns = [
     path('post/list/mine', PostMineList.as_view(), name="post-mine"),
     path('profile/create', ProfileCreate.as_view(), name="profile-create" ),
     path('profile/<pk>/update', ProfileUpdate.as_view(), name="profile-update" ),
+    path('mensaje/list', MensajeList.as_view(), name="mensaje-list" ),
+    path('mensaje/create', MensajeCreate.as_view(), name="mensaje-create" ),
+    path('mensaje/<pk>/delete', MensajeDelete.as_view(), name="mensaje-delete"),
 
 ]
 
