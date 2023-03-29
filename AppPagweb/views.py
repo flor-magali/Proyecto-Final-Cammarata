@@ -13,6 +13,9 @@ def index(request):
 def aboutme(request):
     return render(request, "AppPagweb/aboutme.html")
 
+def blanco(request):
+    return render(request, "AppPagweb/blanco.html")
+
 class PostCreate(LoginRequiredMixin, CreateView):
      model = Postear
      success_url = reverse_lazy("post-list")
